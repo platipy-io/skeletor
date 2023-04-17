@@ -1,3 +1,5 @@
+project_dir = File.dirname(__FILE__)
+
 desc "Run shellcheck against shell files"
 task :"test:shellcheck" do
   sh "shellcheck .envrc"
@@ -10,3 +12,9 @@ end
 
 desc "Run all unit tests"
 task test: %i[test:shellcheck test:editorconfig]
+
+desc "Init the dev environment"
+task :init do
+  kind_config_path = File.join [project_dir, "configs", "kind", "config.yaml"]
+  sh "kind create cluster --config=#{kind_config_path}"
+end

@@ -1,2 +1,4 @@
 shellcheck 0.9.0
 editorconfig-checker 2.7.0
+kind 0.17.0
+kubectl 1.24.5
