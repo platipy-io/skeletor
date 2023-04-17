@@ -1,0 +1,12 @@
+desc "Run shellcheck against shell files"
+task :"test:shellcheck" do
+  sh "shellcheck .envrc"
+end
+
+desc "Run editorconfig checks"
+task :"test:editorconfig" do
+  sh "ec"
+end
+
+desc "Run all unit tests"
+task test: %i[test:shellcheck test:editorconfig]
