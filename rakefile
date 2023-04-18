@@ -31,6 +31,12 @@ file build_file => file_list("cmd") << "out" do |t|
   sh "go build -ldflags '-s -w' -o #{t.name} #{File.join %w[cmd main.go]}"
 end
 
+desc "Build the docker image"
+task :"build:image" do
+  dockerfile_path = File.join %w[build container Dockerfile]
+  sh "docker build -t skeletor -f #{dockerfile_path} ."
+end
+
 desc "Clean up generated files"
 task :clean do
   walk("out") do |entry|
