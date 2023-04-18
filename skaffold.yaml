@@ -1,7 +1,7 @@
 apiVersion: skaffold/v4beta4
 kind: Config
 metadata:
-  name: skeleton
+  name: skeletor
 build:
   artifacts:
     - image: skeletor
