@@ -1,0 +1,8 @@
+namespace: skeletor
+
+commonLabels:
+  app: skeletor
+
+resources:
+  - deployment.yaml
+  - service.yaml
