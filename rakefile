@@ -20,6 +20,7 @@ desc "Init the dev environment"
 task :init do
   kind_config_path = File.join [project_dir, "configs", "kind", "config.yaml"]
   sh "kind create cluster --config=#{kind_config_path}"
+  sh "kubectl create ns skeletor"
 end
 
 directory "out"
