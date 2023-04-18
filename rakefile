@@ -37,6 +37,11 @@ task :"build:image" do
   sh "docker build -t skeletor -f #{dockerfile_path} ."
 end
 
+desc "Get IP of the service"
+task :"service:ip" do
+  sh "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' skeletor-control-plane"
+end
+
 desc "Clean up generated files"
 task :clean do
   walk("out") do |entry|

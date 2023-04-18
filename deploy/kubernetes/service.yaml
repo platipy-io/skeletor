@@ -3,8 +3,10 @@ kind: Service
 metadata:
   name: skeletor
 spec:
+  type: NodePort
   ports:
     - protocol: TCP
       port: 80
       name: api
       targetPort: api
+      nodePort: 30080
