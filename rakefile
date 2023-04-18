@@ -23,6 +23,11 @@ task :init do
   sh "kubectl create ns skeletor"
 end
 
+desc "Destroy entirely the dev environment"
+task :destroy do
+  sh "kind delete clusters skeletor"
+end
+
 desc "Start the dev environment"
 task :dev do
   Rake::Task[:init].invoke if `docker ps -qf name=skeletor-control-plane` == ""
