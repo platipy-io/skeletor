@@ -1,0 +1,13 @@
+apiVersion: skaffold/v4beta4
+kind: Config
+metadata:
+  name: skeleton
+build:
+  artifacts:
+    - image: skeletor
+      docker:
+        dockerfile: build/container/Dockerfile
+manifests:
+  kustomize:
+    paths:
+      - deploy/kubernetes
