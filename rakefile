@@ -2,6 +2,8 @@ project = "skeletor"
 project_dir = File.dirname(__FILE__)
 build_file = :"#{File.join %w[out skeletor]}"
 
+docker = ENV["DOCKER"] || "docker"
+
 task default: [:build]
 
 desc "Run shellcheck against shell files"
@@ -19,8 +21,7 @@ task test: %i[test:shellcheck test:editorconfig]
 
 desc "Init the dev environment"
 task :init do
-  kind_config_path = File.join [project_dir, "configs", "kind", "config.yaml"]
-  sh "kind create cluster --config=#{kind_config_path}"
+  sh "kind create cluster -n #{project} --config=kind.yaml"
   sh "kubectl create ns #{project}"
 end
 
@@ -31,7 +32,7 @@ end
 
 desc "Start the dev environment"
 task :dev do
-  Rake::Task[:init].invoke if `docker ps -qf name=#{project}-control-plane` == ""
+  Rake::Task[:init].invoke if `#{docker} ps -qf name=#{project}-control-plane` == ""
   sh "skaffold dev --port-forward"
 end
 
@@ -47,12 +48,12 @@ end
 desc "Build the docker image"
 task :"build:image" do
   dockerfile_path = File.join %w[build container Dockerfile]
-  sh "docker build -t #{project} -f #{dockerfile_path} ."
+  sh "#{docker} build -t #{project} -f #{dockerfile_path} ."
 end
 
 desc "Get IP of the service"
 task :"service:ip" do
-  sh "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' #{project}-control-plane"
+  sh "#{docker} inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' #{project}-control-plane"
 end
 
 desc "Clean up generated files"
