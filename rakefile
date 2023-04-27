@@ -36,6 +36,12 @@ task :dev do
   sh "skaffold dev --port-forward"
 end
 
+desc "Start the debug environment"
+task :debug do
+  Rake::Task[:init].invoke if `#{docker} ps -qf name=#{project}-control-plane` == ""
+  sh "skaffold debug --port-forward"
+end
+
 directory "out"
 
 desc "Build the binary of the project"

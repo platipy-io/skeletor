@@ -5,6 +5,7 @@ metadata:
 build:
   artifacts:
     - image: skeletor
+      runtimeType: go
       docker:
         dockerfile: build/container/Dockerfile
 manifests:
