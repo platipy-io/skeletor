@@ -7,7 +7,7 @@ build:
     - image: skeletor
       runtimeType: go
       docker:
-        dockerfile: build/container/Dockerfile
+        dockerfile: build/container/dev/Dockerfile
 manifests:
   kustomize:
     paths:

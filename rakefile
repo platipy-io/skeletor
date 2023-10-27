@@ -53,7 +53,7 @@ end
 
 desc "Build the docker image"
 task :"build:image" do
-  dockerfile_path = File.join %w[build container Dockerfile]
+  dockerfile_path = File.join %w[build container release Dockerfile]
   sh "#{docker} build -t #{project} -f #{dockerfile_path} ."
 end
 
