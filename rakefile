@@ -65,6 +65,6 @@ end
 desc "Clean up generated files"
 task :clean do
   walk("out") do |entry|
-     File.directory?(entry) ? Dir.delete(entry) : File.delete(entry)
+    File.directory?(entry) ? Dir.delete(entry) : File.delete(entry)
   end
 end
