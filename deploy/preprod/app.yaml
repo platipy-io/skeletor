@@ -1,0 +1,23 @@
+apiVersion: platipy.io/v1
+kind: App
+metadata:
+  name: skeletor
+spec:
+  db:
+    name: skeletor
+    backup: true
+  bucket:
+    name: skeletor
+    public: true
+    versioning: true
+  deploy:
+    resources:
+      requests:
+        memory: 2G
+        cpu: 2
+    scaling:
+      replicas:
+        min: 2
+        max: 6
+      metrics:
+        cpu: 80
